@@ -14,4 +14,9 @@ router.get('/culican', function(req, res, next) {
   res.render('calendar', { title: 'Culican' });
 });
 
+router.get('*/bydate/*', function(req, res, next) {
+  console.log("Path not found yet...");
+  res.redirect('/');
+});
+
 module.exports = router;
