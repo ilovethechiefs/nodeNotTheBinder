@@ -3,7 +3,15 @@ var router = express.Router();
 
 // Members Page
 router.get('/', ensureAuthenticated, function(req, res, next) {
-  res.render('index', { title: 'Members' });
+  if (req.user.username == 'Debbie') {
+    res.redirect('/calendar/culican');
+  } else if (req.user.username == 'Kathleen') {
+    res.redirect('/calendar/lueder');
+  } else if (req.user.username == 'admin'){
+    res.redirect('/admin');
+  } else {
+    res.redirect('/calendar/tychsen');
+  }
 });
 
 function ensureAuthenticated(req, res, next) {

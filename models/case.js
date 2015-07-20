@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
 
 // User Schema
 var CaseSchema = mongoose.Schema({
@@ -12,6 +11,9 @@ var CaseSchema = mongoose.Schema({
   dob: {
     type: Date, required: true
   },
+  dos: {
+    type: Date, required: true
+  }
 });
 
 var Case = module.exports = mongoose.model('Case', CaseSchema);

@@ -24,11 +24,13 @@ router.post('/addcase', function(req, res, next){
   var firstname = req.body.firstname;
   var lastname = req.body.lastname;
   var dob = req.body.dob;
+  var dos = req.body.dos;
 
   // Form Validation
   req.checkBody('firstname', 'First name is required').notEmpty();
   req.checkBody('lastname', 'Last name is required').notEmpty();
   req.checkBody('dob', 'Date of birth is required').notEmpty();
+  req.checkBody('dos', 'Date of service is required').notEmpty();
 
   // Check for errors
   var errors = req.validationErrors();
@@ -38,13 +40,15 @@ router.post('/addcase', function(req, res, next){
       errors: errors,
       firstname: firstname,
       lastname: lastname,
-      dob: dob
+      dob: dob,
+      dos: dos
     });
   } else {
     var newCase = new Case({
       firstname: firstname,
       lastname: lastname,
-      dob: dob
+      dob: dob,
+      dos: dos
     });
 
     // Create User
