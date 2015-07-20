@@ -1,0 +1,20 @@
+extends admin
+
+block content
+  h1 Add Case
+  p Development Only - Add case to DB
+  ul.errors
+    if errors
+      each error, i in errors
+        li.alert.alert-danger #{error.msg}
+  form(method='post', action='/admin/addcase', enctype='multipart/form-data')
+    .form-group
+      label First Name
+      input.form-control(name='firstname', type='text', placeholder='Enter First Name')
+    .form-group
+      label Last Name
+      input.form-control(name='lastname', type='text', placeholder='Enter Last Name')
+    .form-group
+      label Date of Birth
+      input.form-control(name='dob', type='date', placeholder='Enter Date of Birth')
+    input.btn.btn-default(name='Submit', type='submit', value='Register')

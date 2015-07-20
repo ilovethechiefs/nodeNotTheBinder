@@ -1,9 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-mongoose.connect('mongodb://localhost/nodeauth')
 
-var db = mongoose.connection;
 
 // User Schema
 var UserSchema = mongoose.Schema({
@@ -20,9 +18,6 @@ var UserSchema = mongoose.Schema({
   name: {
     type: String
   },
-  profileimage: {
-    type: String
-  }
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);

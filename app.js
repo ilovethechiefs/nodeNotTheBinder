@@ -14,8 +14,12 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 
+mongoose.connect('mongodb://localhost/nodenotthebinder');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var calendar = require('./routes/calendar');
+var admin = require('./routes/admin');
 
 var app = express();
 
@@ -77,6 +81,8 @@ app.get('*', function(req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/calendar', calendar);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
