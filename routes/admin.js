@@ -19,6 +19,16 @@ router.get('/adduser', function(req, res, next) {
   res.render('adduser', { title: 'Add User'});
 })
 
+router.get('/displayuser', function(req, res, next) {
+  User.find({}, function (err, db_users) {
+    if(err) {/*error!!!*/}
+    res.render('displayuser', {
+      users: db_users
+    });
+  });
+});
+
+
 router.post('/addcase', function(req, res, next){
   // Get Form Values
   var firstname = req.body.firstname;
@@ -85,7 +95,7 @@ router.post('/adduser', function(req, res, next){
   var errors = req.validationErrors();
 
   if(errors){
-    res.render('register', {
+    res.render('adduser', {
       errors: errors,
       name: name,
       email: email,
