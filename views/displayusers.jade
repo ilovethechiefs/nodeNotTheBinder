@@ -1,0 +1,13 @@
+extends admin
+
+block content
+  h1 Display from DB
+
+  ul
+    if users
+      each user in users
+        li Name: #{user.name}
+        li Email: #{user.email}
+        li Username: #{user.username}
+        li Password: #{user.password}
+        hr

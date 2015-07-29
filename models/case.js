@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-// User Schema
+// Case Schema
 var CaseSchema = mongoose.Schema({
   firstname: {
     type: String, required: true
@@ -13,6 +13,64 @@ var CaseSchema = mongoose.Schema({
   },
   dos: {
     type: Date, required: true
+  },
+  contactinfo: [{ 
+    phonetype: String,
+    name: String,
+    number: String
+  }],
+  insurance: { 
+    type: Array,
+    "default": []
+  },
+  procedure: {
+    type: Array,
+    "default": []
+  },
+  duration: {
+    type: Number
+  },
+  reservation: {
+    type: String
+  },
+  precert: {
+    type: String
+  },
+  coordinator: {
+    type: String
+  },
+  idx: {
+    type: String
+  },
+  ORSched: {
+    type: String
+  },
+  prereg: {
+    type: String
+  },
+  chart: {
+    type: String
+  },
+  idxnotes: {
+    type: String
+  },
+  confirmed: {
+    type: String
+  },
+  coming: {
+    type: String
+  },
+  insuranceConf: {
+    type: String
+  },
+  preop: {
+    type: String
+  },
+  sdm: {
+    type: String
+  },
+  cancel: {
+    type: String
   }
 });
 
@@ -22,11 +80,16 @@ module.exports.createCase = function(newCase, callback) {
   newCase.save(callback);
 };
 
+module.exports.getCaseById = function(id, callback){
+  Case.findById(id, callback);
+}
+
 module.exports.findAllCases = function(callback) {
   var res = null;
   Case.find({}, {}, function (err, docs) {
     if (err) throw err;
     console.log(docs);
+    return docs;
   });
   return res;
 }

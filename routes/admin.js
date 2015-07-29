@@ -7,22 +7,32 @@ var User = require('../models/user');
 var Case = require('../models/case');
 
 // Members Page
-router.get('/', function(req, res, next) {
+router.get('/', ensureAuthenticated, function(req, res, next) {
   res.render('admin', { title: 'Admin' });
 });
 
-router.get('/addcase', function(req, res, next) {
+router.get('/addcase', ensureAuthenticated, function(req, res, next) {
   res.render('addcase', { title: 'Add Case'});
 })
 
-router.get('/adduser', function(req, res, next) {
+router.get('/displaycases', ensureAuthenticated, function(req, res, next) {
+  Case.find({}, function (err, db_cases) {
+    if(err) throw err;
+    res.render('displaycases', {
+      cases: db_cases
+    });
+    console.log(db_cases)
+  });
+});
+
+router.get('/adduser', ensureAuthenticated, function(req, res, next) {
   res.render('adduser', { title: 'Add User'});
 })
 
-router.get('/displayuser', function(req, res, next) {
+router.get('/displayusers', ensureAuthenticated, function(req, res, next) {
   User.find({}, function (err, db_users) {
-    if(err) {/*error!!!*/}
-    res.render('displayuser', {
+    if(err) throw err;
+    res.render('displayusers', {
       users: db_users
     });
   });
@@ -35,7 +45,7 @@ router.post('/addcase', function(req, res, next){
   var lastname = req.body.lastname;
   var dob = req.body.dob;
   var dos = req.body.dos;
-
+  
   // Form Validation
   req.checkBody('firstname', 'First name is required').notEmpty();
   req.checkBody('lastname', 'Last name is required').notEmpty();
@@ -58,7 +68,7 @@ router.post('/addcase', function(req, res, next){
       firstname: firstname,
       lastname: lastname,
       dob: dob,
-      dos: dos
+      dos: dos,
     });
 
     // Create User
@@ -124,5 +134,12 @@ router.post('/adduser', function(req, res, next){
     res.redirect('/');
   }
 });
+
+function ensureAuthenticated(req, res, next) {
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/users/login');
+}
 
 module.exports = router;

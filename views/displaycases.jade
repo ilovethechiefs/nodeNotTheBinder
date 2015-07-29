@@ -1,0 +1,33 @@
+extends admin
+
+block content
+  h1 Display from DB
+
+  ul
+    if cases
+      each val in cases
+        li Scheduled on: #{val.scheduledon}
+        li First Name: #{val.firstname}
+        li Last Name: #{val.lastname}
+        li Date of Birth: #{val.dob.getUTCMonth() + 1}/#{val.dob.getUTCDate()}/#{val.dob.getUTCFullYear()}
+        li Date of Service: #{val.dos.getUTCMonth() + 1}/#{val.dos.getUTCDate()}/#{val.dos.getUTCFullYear()}
+        li Contact Info: #{val.contactinfo.phonetype}: #{val.contactinfo.number} (#{val.contactinfo.name})
+        li Insurance: #{val.insurance}
+        li Procedure: #{val.procedure}
+        li Duration: #{val.duration}
+        li Notes for Reservation: #{val.reservation}
+        li Notes for Pre-Certification Coordinator: #{val.precert}
+        li Notes for Surgical Coordinator: #{val.coordinator}
+        li Case scheduled in IDX: #{val.idx}
+        li Reservation sent to OR Scheduling: #{val.ORSched}
+        li Reservation sent to Pre-Registration: #{val.prereg}
+        li Precert info written in chart: #{val.chart}
+        li Precert info in IDX: #{val.idxnotes}
+        li Confirmed: #{val.confirmed}
+        li Coming: #{val.coming}
+        li Insurance Confirmed: #{val.insuranceConf}
+        li Pre-op: #{val.preop}
+        li Same Day Measurements: #{val.sdm}
+        li Cancel: #{val.cancel}
+        hr
+        hr

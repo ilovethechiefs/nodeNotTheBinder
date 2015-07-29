@@ -18,10 +18,14 @@ html
         #navbar.collapse.navbar-collapse
           ul.nav.navbar-nav
             if user
-              li(class=(title == 'Add Case' ? 'active' : ''))
-                a(href='/admin/addcase') Add Case
               li(class=(title == 'Add User' ? 'active' : ''))
                 a(href='/admin/adduser') Add User
+              li(class=(title == 'Display User' ? 'active' : ''))
+                a(href='/admin/displayusers') Display Users
+              li(class=(title == 'Add Case' ? 'active' : ''))
+                a(href='/admin/addcase') Add Case
+              li(class=(title == 'Display Case' ? 'active' : ''))
+                a(href='/admin/displaycases') Display Cases
           if user
             ul.nav.navbar-nav.navbar-right
               li

@@ -20,4 +20,61 @@ block content
     .form-group
       label Date of Service
       input.form-control(name='dos', type='date', placeholder='Enter Date of Service')
+    .form-group
+      label Contact Info
+        input.form-control(name='phonetype', type='string', placeholder='Phone Type')
+        input.form-control(name='name', type='string', placeholder='Name')
+        input.form-control(name='number', type='string', placeholder='Number')
+    .form-group
+      label Insurance
+      input.form-control(name='insurance', type='string')
+    .form-group
+      label Procedure
+      input.form-control(name='procedure', type='string')
+    .form-group
+      label Duration
+      input.form-control(name='duration', type='number')
+    .form-group
+      label Notes for Reservation:
+      input.form-control(name='reservation', type='string')
+    .form-group
+      label Notes for Pre-Certification Coordinator
+      input.form-control(name='precert', type='string')
+    .form-group
+      label Notes for Surgical Coordinator
+      input.form-control(name='coordinator', type='string')
+    .form-group
+      label Entered into IDX
+      input.form-control(name='idx', type='date')
+    .form-group
+      label Reservation Sent to OR Scheduling:
+      input.form-control(name='ORSched', type='string')
+    .form-group
+      label Reservation Sent to Pre-Reg
+      input.form-control(name='prereg', type='string')
+    .form-group
+      label Precert info in chart?
+      input.form-control(name='chart', type='string')
+    .form-group
+      label Precert info in IDX?
+      input.form-control(name='idxnotes', type='string')
+    .form-group
+      label Confirmed?
+      input.form-control(name='confirmed', type='string')
+    .form-group
+      label Coming with?
+      input.form-control(name='coming', type='string')
+    .form-group
+      label Insurance Confirmed?
+      input.form-control(name='insuranceConf', type='string')
+    .form-group
+      label Pre-op
+      input.form-control(name='preop', type='string')
+    .form-group
+      label Same Day Measurements?
+      input.form-control(name='sdm', type='string')
+    .form-group
+      label Cancel?
+      input.form-control(name='cancel', type='string')
+
     input.btn.btn-default(name='Submit', type='submit', value='Register')
