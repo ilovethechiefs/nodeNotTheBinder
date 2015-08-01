@@ -12,7 +12,7 @@ router.get('/', ensureAuthenticated, function(req, res, next) {
 });
 
 router.get('/addcase', ensureAuthenticated, function(req, res, next) {
-  res.render('addcase', { title: 'Add Case'});
+  res.render('addcase', { title: 'Add Case' });
 })
 
 router.get('/displaycases', ensureAuthenticated, function(req, res, next) {
@@ -46,6 +46,24 @@ router.post('/addcase', function(req, res, next){
   var dob = req.body.dob;
   var dos = req.body.dos;
   
+  // Figure our array stuff here
+  
+  var duration = req.body.duration;
+  var reservation = req.body.reservation;
+  var precert = req.body.precert;
+  var coordinator = req.body.coordinator;
+  var idx = req.body.idx;
+  var ORSched = req.body.ORSched;
+  var prereg = req.body.prereg;
+  var chart = req.body.chart;
+  var idxnotes = req.body.idxnotes;
+  var confirmed = req.body.confirmed;
+  var coming = req.body.coming;
+  var insuranceConf = req.body.insuranceConf;
+  var preop = req.body.preop;
+  var sdm = req.body.sdm;
+  var cancel = req.body.cancel;
+  
   // Form Validation
   req.checkBody('firstname', 'First name is required').notEmpty();
   req.checkBody('lastname', 'Last name is required').notEmpty();
@@ -69,7 +87,24 @@ router.post('/addcase', function(req, res, next){
       lastname: lastname,
       dob: dob,
       dos: dos,
+      duration: duration,
+      reservation: reservation,
+      precert: precert,
+      coordinator: coordinator,
+      idx: idx,
+      ORSched: ORSched,
+      prereg: prereg,
+      chart: chart,
+      idxnotes: idxnotes,
+      confirmed: confirmed,
+      coming: coming,
+      insuranceConf: insuranceConf,
+      preop: preop,
+      sdm: sdm,
+      cancel: cancel
     });
+    
+    
 
     // Create User
     Case.createCase(newCase, function(err, newCase) {

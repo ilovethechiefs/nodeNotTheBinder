@@ -1,5 +1,19 @@
 var mongoose = require('mongoose');
 
+var ContactSchema = mongoose.Schema({
+  phoneType: String,
+  name: String,
+  number: String
+});
+
+var InsuranceSchema = mongoose.Schema({
+  insurance: String
+});
+
+var ProcedureSchema = mongoose.Schema({
+  procedure: String
+});
+
 // Case Schema
 var CaseSchema = mongoose.Schema({
   firstname: {
@@ -14,19 +28,9 @@ var CaseSchema = mongoose.Schema({
   dos: {
     type: Date, required: true
   },
-  contactinfo: [{ 
-    phonetype: String,
-    name: String,
-    number: String
-  }],
-  insurance: { 
-    type: Array,
-    "default": []
-  },
-  procedure: {
-    type: Array,
-    "default": []
-  },
+  contactinfo: [ContactSchema],
+  insurance: [InsuranceSchema],
+  procedure: [ProcedureSchema],
   duration: {
     type: Number
   },

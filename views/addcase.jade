@@ -3,78 +3,74 @@ extends admin
 block content
   h1 Add Case
   p Development Only - Add case to DB
-  ul.errors
-    if errors
-      each error, i in errors
-        li.alert.alert-danger #{error.msg}
-  form(method='post', action='/admin/addcase', enctype='multipart/form-data')
-    .form-group
-      label First Name
-      input.form-control(name='firstname', type='text', placeholder='Enter First Name')
-    .form-group
-      label Last Name
-      input.form-control(name='lastname', type='text', placeholder='Enter Last Name')
-    .form-group
-      label Date of Birth
-      input.form-control(name='dob', type='date', placeholder='Enter Date of Birth')
-    .form-group
-      label Date of Service
-      input.form-control(name='dos', type='date', placeholder='Enter Date of Service')
-    .form-group
-      label Contact Info
-        input.form-control(name='phonetype', type='string', placeholder='Phone Type')
-        input.form-control(name='name', type='string', placeholder='Name')
-        input.form-control(name='number', type='string', placeholder='Number')
-    .form-group
-      label Insurance
-      input.form-control(name='insurance', type='string')
-    .form-group
-      label Procedure
-      input.form-control(name='procedure', type='string')
-    .form-group
-      label Duration
-      input.form-control(name='duration', type='number')
-    .form-group
-      label Notes for Reservation:
-      input.form-control(name='reservation', type='string')
-    .form-group
-      label Notes for Pre-Certification Coordinator
-      input.form-control(name='precert', type='string')
-    .form-group
-      label Notes for Surgical Coordinator
-      input.form-control(name='coordinator', type='string')
-    .form-group
-      label Entered into IDX
-      input.form-control(name='idx', type='date')
-    .form-group
-      label Reservation Sent to OR Scheduling:
-      input.form-control(name='ORSched', type='string')
-    .form-group
-      label Reservation Sent to Pre-Reg
-      input.form-control(name='prereg', type='string')
-    .form-group
-      label Precert info in chart?
-      input.form-control(name='chart', type='string')
-    .form-group
-      label Precert info in IDX?
-      input.form-control(name='idxnotes', type='string')
-    .form-group
-      label Confirmed?
-      input.form-control(name='confirmed', type='string')
-    .form-group
-      label Coming with?
-      input.form-control(name='coming', type='string')
-    .form-group
-      label Insurance Confirmed?
-      input.form-control(name='insuranceConf', type='string')
-    .form-group
-      label Pre-op
-      input.form-control(name='preop', type='string')
-    .form-group
-      label Same Day Measurements?
-      input.form-control(name='sdm', type='string')
-    .form-group
-      label Cancel?
-      input.form-control(name='cancel', type='string')
+  
+  html.
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <form id="bookForm" method="post" class="form-horizontal">
+      <div class="form-group">
+          <label class="col-xs-1 control-label">Book</label>
+          <div class="col-xs-4">
+              <input type="text" class="form-control" name="book[0].title" placeholder="Title" />
+          </div>
+          <div class="col-xs-4">
+              <input type="text" class="form-control" name="book[0].isbn" placeholder="ISBN" />
+          </div>
+          <div class="col-xs-2">
+              <input type="text" class="form-control" name="book[0].price" placeholder="Price" />
+          </div>
+          <div class="col-xs-1">
+              <button type="button" id="addButton" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+          </div>
+      </div>
 
-    input.btn.btn-default(name='Submit', type='submit', value='Register')
+      <!-- The template for adding new field -->
+      <div class="form-group hide" id="bookTemplate">
+          <div class="col-xs-4 col-xs-offset-1">
+              <input type="text" class="form-control" name="title" placeholder="Title" />
+          </div>
+          <div class="col-xs-4">
+              <input type="text" class="form-control" name="isbn" placeholder="ISBN" />
+          </div>
+          <div class="col-xs-2">
+              <input type="text" class="form-control" name="price" placeholder="Price" />
+          </div>
+          <div class="col-xs-1">
+              <button type="button" name="removeButton" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+          </div>
+      </div>
+    </form>
+
+    <script>
+      $(document).ready(function() {
+        bookIndex = 0;
+        
+        $('#addButton').click(function() {
+          bookIndex++;
+          var $template = $('#bookTemplate'),
+              $clone    = $template
+                              .clone()
+                              .removeClass('hide')
+                              .removeAttr('id')
+                              .attr('data-book-index', bookIndex)
+                              .insertBefore($template);
+
+          // Update the name attributes
+          $clone
+              .find('[name="title"]').attr('name', 'book[' + bookIndex + '].title').end()
+              .find('[name="isbn"]').attr('name', 'book[' + bookIndex + '].isbn').end()
+              .find('[name="price"]').attr('name', 'book[' + bookIndex + '].price').end()
+              .find('[name="removeButton"]').attr('id', 'book[' + bookIndex + '].removeButton').end()
+              .find('[name="removeButton"]').attr('name', 'book[' + bookIndex + '].removeButton').end();
+        });
+        
+        $('body').on('click', '.removeButton', function() {
+          var $row  = $(this).parents('.form-group');
+          bookIndex--;
+
+          // Remove element containing the fields
+          $row.remove();
+        });
+    });
+    </script>
+
+    
